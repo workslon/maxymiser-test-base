@@ -34,4 +34,4 @@
 
     });
   });
-}(function () { return this;}()))();
+} ((function () { return this;}())));

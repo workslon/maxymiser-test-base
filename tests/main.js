@@ -46,6 +46,6 @@
     };
     jasmineEnv.execute();
   });
-}((function () {return this;}()))());
+} ((function () { return this;}())));
 
 
