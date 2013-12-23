@@ -1,1 +1,1 @@
-TODO: Add scripts workflow here
+Base.js - is a site level script. It should be published with order less than all company level scripts.
