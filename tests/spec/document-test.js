@@ -2,8 +2,9 @@
   'use strict';
   global.define([
     'jasmine_async',
+    'jquery',
     'test-base'
-  ], function (AsyncSpec) {
+  ], function (AsyncSpec, $) {
     global.describe("Document", function () {
       var async = new AsyncSpec(this),
         testBase = new TestBase();

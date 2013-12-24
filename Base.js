@@ -392,7 +392,6 @@ Core.prototype.trackActionImmediate = function (action, callback) {
  *   name: string * required,
  *   value: number default 1
  *   attribute: string default '',
- *   pageId: string default mmevents
  * }
  */
 Core.prototype.trackActionDeferred = function (action) {

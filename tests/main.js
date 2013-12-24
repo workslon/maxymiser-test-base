@@ -40,7 +40,7 @@
     var jasmineEnv = jasmine.getEnv(),
       htmlReporter = new jasmine.HtmlReporter();
     jasmineEnv.updateInterval = 1000;
-    jasmineEnv.defaultTimeoutInterval = 20000;
+    jasmineEnv.defaultTimeoutInterval = 1500;
     jasmineEnv.addReporter(htmlReporter);
     jasmineEnv.specFilter = function (spec) {
       return htmlReporter.specFilter(spec);
