@@ -7,6 +7,7 @@
       "jasmine": 'tests/components/jasmine/jasmine',
       "jasmine_html": 'tests/components/jasmine/jasmine-html',
       "jasmine_async": 'tests/components/jasmine/async',
+      "jquery": 'tests/components/jquery/jquery',
       "test": 'tests/spec'
     },
     "shim": {
