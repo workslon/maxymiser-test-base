@@ -9,17 +9,17 @@
       /**
        * mock mmcore
        */
-      global.mmcore = {
-        "AddDocLoadHandler": function (callback) {},
-        "EH": function (exception) {},
-        "SetAction": function () {},
-        "SetPageID": function () {},
-        "CGRequest": function () {},
-        "$Action": function () {},
-        "HideMaxyboxes": function () {},
-        "GenInfo": {},
-        "RenderMaxyboxes": function () {}
-      };
+      global.mmcore = global.mmcore || {};
+      global.mmcore.AddDocLoadHandler = function (callback) {};
+      global.mmcore.EH = function (exception) {};
+      global.mmcore.SetAction = function () {};
+      global.mmcore.SetPageID = function () {};
+      global.mmcore.CGRequest = function () {};
+      global.mmcore.$Action = function () {};
+      global.mmcore.HideMaxyboxes = function () {};
+      global.mmcore.GenInfo = {};
+      global.mmcore.RenderMaxyboxes = function () {};
+
 
       it("trackActionImmediate (params as string)", function() {
         spyOn(global.mmcore, 'SetAction');
