@@ -9,14 +9,6 @@
       var async = new AsyncSpec(this),
         testBase = new TestBase();
 
-      async.beforeEach(function (done) {
-        done();
-      });
-
-      async.afterEach(function (done) {
-        done();
-      });
-
       async.it("showElement", function(done) {
         testBase.document.showElement('#new-page-element-1');
 
