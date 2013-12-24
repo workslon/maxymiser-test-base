@@ -1,3 +1,9 @@
+/**
+ * @author [developer name]
+ * @created [start date]
+ * @modified [last modify date]
+ * @constructor
+ */
 function TXXActions() {}
 
 TXXActions.prototype = new TestBase();

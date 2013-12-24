@@ -1,5 +1,8 @@
 /**
  * Test XX variants Base class
+ * @author [developer name]
+ * @created [start date]
+ * @modified [last modify date]
  * @constructor
  */
 function TXXVariants() {}
