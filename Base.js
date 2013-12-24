@@ -351,7 +351,8 @@ Events.prototype.fire = function (type) {
     event.initEvent(type, true, true);
     element.dispatchEvent(event);
   } else if (element.createEventObject) {
-    event = element.createEventObject('HTMLEvents');
+    event = element.createEventObject();
+    //TODO: fix ie8 bug with element.fireEvent "Error: Invalid argument."
     element.fireEvent('on' + type, event);
   } else {
     throw new Error('can not create event ' + type);

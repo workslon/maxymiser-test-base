@@ -8,29 +8,20 @@
       var async = new AsyncSpec(this),
         testBase = new TestBase();
 
-      async.beforeEach(function (done) {
-        done();
-      });
-
-      async.afterEach(function (done) {
-        done();
+      async.it("on + fire", function(done) {
+        testBase.events.on('myCustomEvent', function (event) {
+          expect(event.target).toBe(global.document);
+          done();
+        });
+        testBase.events.fire('myCustomEvent');
       });
 
       async.it("unbind", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
-      });
-
-      async.it("on", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
-      });
-
-      async.it("fire", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
+        testBase.events.on('myCustomEvent1', function (event) {
+          console.log('shouldn\'t triggered');
+        });
+        testBase.events.unbind('myCustomEvent1');
+        testBase.events.fire('myCustomEvent1');
         done();
       });
 
