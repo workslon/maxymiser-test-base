@@ -509,7 +509,7 @@ TestBase.prototype.core = new Core();
  */
 TestBase.prototype.bind = function (context, fn) {
     return function () {
-      fn.apply(context, arguments);
+      return fn.apply(context, arguments);
     };
 };
 
@@ -534,6 +534,6 @@ TestBase.prototype.decorate = function (context, methodName, decorator) {
   var origin = context[methodName];
   context[methodName] = function () {
     decorator.apply(context, arguments);
-    origin.apply(context, arguments);
+    return origin.apply(context, arguments);
   };
 };

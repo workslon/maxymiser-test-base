@@ -1,37 +1,35 @@
 (function (global) {
   'use strict';
   global.define([
-    'jasmine_async',
     'test-base'
-  ], function (AsyncSpec) {
+  ], function () {
     global.describe("Base", function () {
-      var async = new AsyncSpec(this),
-        testBase = new TestBase();
+      var testBase = new TestBase();
 
-      async.beforeEach(function (done) {
-        done();
+      it("bind", function() {
+        var module = {
+            "variable": 'module variable',
+            "method": function() { return this.variable; }
+          },
+          boundMethod = testBase.bind(module, module.method);
+        expect(boundMethod()).toBe('module variable');
       });
 
-      async.afterEach(function (done) {
-        done();
+      it("trim", function() {
+        expect(testBase.trim('  some text   ')).toBe('some text');
       });
 
-      async.it("bind", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
-      });
+      it("decorate", function() {
+        var mockMethods = {
+          "decorator": function () {},
+          "native": function () {return 'throw origin method';}
+        };
+        spyOn(mockMethods, 'decorator');
 
-      async.it("trim", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
-      });
+        testBase.decorate(mockMethods, 'native', mockMethods.decorator);
 
-      async.it("decorate", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
+        expect(mockMethods.native('argument1', 'argument2', 'argument3')).toBe('throw origin method');
+        expect(mockMethods.decorator).toHaveBeenCalledWith('argument1', 'argument2', 'argument3');
       });
 
     });
