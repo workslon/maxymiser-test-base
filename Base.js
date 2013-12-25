@@ -307,8 +307,22 @@ Document.prototype.showElement = function (selector) {
  */
 function Events() {
   this.element = document;
+  this.eventMethods = {};
+  this.eventArguments = {};
   this.eventHandlers = {};
 }
+
+Events.prototype.add = function (type, handler, context) {
+  var self = this;
+  this.eventMethods[type] = this.eventMethods[type] || [];
+  this.eventMethods[type].push(handler);
+  this.eventHandlers[type] = function () {
+    var i, len = self.eventMethods[type].length;
+    for (i = 0; i < len; i += 1) {
+      self.eventMethods[type][i].apply(context || window, self.eventArguments[type] || []);
+    }
+  };
+};
 
 /**
  * remove event listener
@@ -322,30 +336,38 @@ Events.prototype.unbind = function (type, handler) {
   } else {
     element.detachEvent('on' + type, handler || this.eventHandlers[type]);
   }
+  this.eventMethods = {};
+  this.eventArguments = {};
+  this.eventHandlers = {};
 };
 
 /**
  * subscribe on event type
  * @param type
  * @param handler
+ * @param context
  */
-Events.prototype.on = function (type, handler) {
+Events.prototype.on = function (type, handler, context) {
   var element = this.element;
   this.unbind(type, handler);
-  this.eventHandlers[type] = handler;
+  this.add(type, handler, context);
   if (element.addEventListener) {
-    element.addEventListener(type, handler, false);
+    try {
+    element.addEventListener(type, this.eventHandlers[type], false);
+    } catch (e) {alert(e)}
   } else {
-    element.attachEvent('on' + type, handler);
+    element.attachEvent('on' + type, this.eventHandlers[type]);
   }
 };
 
 /**
  * trigger event
  * @param type
+ * @param args []
  */
-Events.prototype.fire = function (type) {
+Events.prototype.fire = function (type, args) {
   var event, element = this.element;
+  this.eventArguments[type] = args || [];
   if (element.createEvent) {
     event = element.createEvent('HTMLEvents');
     event.initEvent(type, true, true);
