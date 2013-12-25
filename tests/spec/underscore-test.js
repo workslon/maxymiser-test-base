@@ -1,37 +1,51 @@
 (function (global) {
   'use strict';
   global.define([
-    'jasmine_async',
     'test-base'
-  ], function (AsyncSpec) {
+  ], function () {
     global.describe("Underscore", function () {
-      var async = new AsyncSpec(this),
-        testBase = new TestBase();
+      var testBase = new TestBase();
 
-      async.beforeEach(function (done) {
-        done();
+      it("map (object)", function() {
+        var result = testBase._.map({"key1": 1, "key2": 2}, function (value, key) {
+          expect(value).toEqual(jasmine.any(Number));
+          expect(key).toEqual(jasmine.any(String));
+          return value * 5;
+        });
+        expect(result).toEqual([5, 10]);
       });
 
-      async.afterEach(function (done) {
-        done();
+      it("map (array)", function() {
+        var result = testBase._.map([{"key": 1}, {"key": 2}], function (item, num) {
+          expect(item).toEqual(jasmine.any(Object));
+          expect(num).toEqual(jasmine.any(Number));
+          item.key = item.key * 5;
+          return item;
+        });
+        expect(result).toEqual([{"key": 5}, {"key": 10}]);
       });
 
-      async.it("map", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
+      it("each (object)", function() {
+        testBase._.each({"key1": 1, "key2": 2}, function (value, key) {
+          expect(value).toEqual(jasmine.any(Number));
+          expect(key).toEqual(jasmine.any(String));
+          return value * 5;
+        });
       });
 
-      async.it("each", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
+      it("each (array)", function() {
+        testBase._.each([{"key": 1}, {"key": 2}], function (item, num) {
+          expect(item).toEqual(jasmine.any(Object));
+          expect(num).toEqual(jasmine.any(Number));
+          item.key = item.key * 5;
+          return item;
+        });
       });
 
-      async.it("has", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
+      it("has", function() {
+        var obj = {"own": true};
+        expect(testBase._.has(obj, '__proto__')).toEqual(false);
+        expect(testBase._.has(obj, 'own')).toEqual(true);
       });
 
     });
