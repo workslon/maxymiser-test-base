@@ -81,7 +81,7 @@ Async.prototype.waterfall = function (tasks, callback) {
       var task = tasks[executed] || null;
       executed += 1;
       try {
-        return task ? task(done) : callback();
+        return task ? task(done) : callback(null);
       } catch (exc) {
         callback(exc);
       }

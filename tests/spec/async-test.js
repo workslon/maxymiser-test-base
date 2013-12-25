@@ -16,16 +16,53 @@
         done();
       });
 
-      async.it("parallel", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
+      async.it("parallel", function (done) {
+        testBase.async.parallel([
+          function(done){
+            setTimeout(function () {
+              done(null);
+            }, 200);
+          },
+          function(done){
+            setTimeout(function(){
+              done(null);
+            }, 100);
+          }
+        ],
+        function(err){
+          expect(err).toBe(null);
+          done();
+        });
       });
 
       async.it("waterfall", function(done) {
-        //TODO: call testBase methods
-        expect(true).toBe(true);
-        done();
+        var exampleVar = 1;
+        testBase.async.waterfall([
+          function(done){
+            setTimeout(function () {
+              expect(exampleVar).toBe(1);
+              exampleVar += 1;
+              done(null);
+            }, 200);
+          },
+          function(done){
+            setTimeout(function(){
+              expect(exampleVar).toBe(2);
+              exampleVar += 1;
+              done(null);
+            }, 100);
+          },
+          function(done){
+            setTimeout(function(){
+              expect(exampleVar).toBe(3);
+              done(null);
+            }, 100);
+          }
+        ],
+        function(err){
+          expect(err).toBe(null);
+          done();
+        });
       });
 
     });
